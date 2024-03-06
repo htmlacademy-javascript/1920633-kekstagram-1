@@ -1,4 +1,4 @@
-function checkPalindrome (string) {
+const checkPalindrome = (string) => {
   let normalizedString = string.replaceAll(' ', '');
   normalizedString = normalizedString.toLowerCase();
 
@@ -16,7 +16,7 @@ console.log(checkPalindrome('ДовОд')); // true
 console.log(checkPalindrome('Кекс'));  // false
 console.log(checkPalindrome('Лёша на полке клопа нашёл ')); // true
 
-function getInteger (string) {
+const getInteger = (string) => {
   let integer = '';
 
   for (let i = 0; i < string.length; i++) {
@@ -34,7 +34,7 @@ console.log(getInteger('1 кефир, 0.5 батона')); // 105
 console.log(getInteger('агент 007'));           // 7
 console.log(getInteger('а я томат'));           // NaN
 
-function addSymbols (string, length, newSymbols) {
+const addSymbols = (string, length, newSymbols) => {
   const addedLength = length - string.length;
   let newString = '';
 
