@@ -2,5 +2,6 @@
 import './util.js';
 import {createPostList} from './data.js';
 import './thumbnails.js';
+import './user-modal.js';
 
 console.log(createPostList());
