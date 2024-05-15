@@ -1,13 +1,11 @@
 import {isEscapeKey} from './util.js';
-import {openBigPicture} from './open-big-picture.js';
+import {openBigPicture, clearComments} from './open-big-picture.js';
 import {usersPosts} from './thumbnails.js';
 
 const thumbnails = document.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const modalCloseElement = document.querySelector('.big-picture__cancel');
-const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const socialComments = bigPicture.querySelector('.social__comments');
-const commentsLoader = bigPicture.querySelector('.comments-loader');
 const body = document.body;
 
 const onDocumentKeydown = (evt) => {
@@ -20,8 +18,6 @@ const onDocumentKeydown = (evt) => {
 const openModal = (thumbnail, picture) => {
   thumbnail.addEventListener('click', () => {
     bigPicture.classList.remove('hidden');
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
     socialComments.replaceChildren();
     openBigPicture(picture);
     body.classList.add('modal-open');
@@ -37,7 +33,7 @@ for (let i = 0; i < thumbnails.length; i++) {
 function closeModal () {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
-  socialComments.replaceChildren();
+  clearComments();
 
   document.removeEventListener('keydown', onDocumentKeydown);
 }
@@ -45,5 +41,3 @@ function closeModal () {
 modalCloseElement.addEventListener('click', () => {
   closeModal();
 });
-
-
