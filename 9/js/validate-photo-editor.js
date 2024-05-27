@@ -1,10 +1,15 @@
-/* eslint-disable no-console*/
 const photoEditorForm = document.querySelector('.img-upload__form');
 const hashtagInput = photoEditorForm.querySelector('.text__hashtags');
 const textareaInput = photoEditorForm.querySelector('.text__description');
 const validHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
-const pristine = new Pristine(photoEditorForm);
+const pristine = new Pristine(photoEditorForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextTag: 'span',
+  errorTextClass: 'img-upload__error'
+});
 
 const getHashtagArray = (value) => value.split(' ');
 
@@ -27,24 +32,18 @@ const validateHashtagDuplicates = (value) => {
   return duplicates.length === 0;
 };
 
-pristine.addValidator(hashtagInput, validateHashtag);
-pristine.addValidator(hashtagInput, validateHashtagNumber);
-pristine.addValidator(hashtagInput, validateHashtagDuplicates);
+pristine.addValidator(hashtagInput, validateHashtag, 'Введён невалидный хэштег');
+pristine.addValidator(hashtagInput, validateHashtagNumber, 'Количество хэштегов не должно превышать 5');
+pristine.addValidator(hashtagInput, validateHashtagDuplicates, 'Хэштеги не должны повторяться');
 
 const validateTextarea = (value) => value.length <= 140;
 
-pristine.addValidator(textareaInput, validateTextarea);
+pristine.addValidator(textareaInput, validateTextarea, 'Длина комментария не должна превышать 140 символов');
 
 photoEditorForm.addEventListener('submit', (evt) => {
-  evt.preventDefault();
   const isValid = pristine.validate();
-  if (isValid) {
-    console.log('Можно отправлять');
-  } else {
-    console.log('Форма невалидна');
+
+  if (!isValid) {
+    evt.preventDefault();
   }
 });
-
-console.log(validateHashtag('#keks'));
-console.log(validateHashtagNumber('#keks #keks #keks #keks #keks #keks'));
-console.log(validateHashtagDuplicates('#keks #flower #travel #work #KekS'));

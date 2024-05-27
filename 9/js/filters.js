@@ -1,4 +1,3 @@
-/* eslint-disable no-console*/
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const sliderValue = document.querySelector('.effect-level__value');
@@ -97,9 +96,10 @@ const clearStyle = () => {
   sliderValue.value = '';
 };
 
-effectsList.addEventListener('click', (evt) => {
+let currentSettings = {};
+
+effectsList.addEventListener('change', (evt) => {
   const currentFilter = filterList[evt.target.value];
-  console.log(currentFilter);
 
   sliderElement.noUiSlider.updateOptions({
     range: {
@@ -110,7 +110,10 @@ effectsList.addEventListener('click', (evt) => {
     step: currentFilter.step,
   });
 
-  console.log(currentFilter);
+  currentSettings = {
+    filter: currentFilter.filter,
+    units: currentFilter.units
+  };
 
   currentPhoto.classList.add(`effects__preview--${currentFilter.filter}`);
 
@@ -131,6 +134,11 @@ effectsList.addEventListener('click', (evt) => {
   }
 
   currentPhoto.style.filter = `${currentFilter.filter}(${currentFilter.max}${currentFilter.units})`;
+});
+
+sliderElement.noUiSlider.on('update', () => {
+  sliderValue.value = sliderElement.noUiSlider.get();
+  currentPhoto.style.filter = `${currentSettings.filter}(${sliderValue.value}${currentSettings.units})`;
 });
 
 hideSlider();
