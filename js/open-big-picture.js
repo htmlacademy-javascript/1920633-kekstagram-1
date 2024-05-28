@@ -34,7 +34,7 @@ const showNextComments = () => {
   });
   commentsSection.append(commentFragment);
 
-  socialCommentCount.firstChild.data = `${renderedComments.length + currentCount} из `;
+  socialCommentCount.innerHTML = `${renderedComments.length + currentCount} из <span class="comments-count">${commentsCount.textContent}</span> комментариев`;
 
   if (renderedComments.length + currentCount >= currentComments.length) {
     commentsLoader.classList.add('hidden');
