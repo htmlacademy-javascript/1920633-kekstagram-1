@@ -5,13 +5,13 @@ const uploadInput = document.getElementById('upload-file');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const closeOverlayButton = document.getElementById('upload-cancel');
 
-const focusedInput = () => {
+const isInputFocused = () => {
   const activeElement = document.activeElement;
   return activeElement.classList.contains('text__hashtags') || activeElement.classList.contains('text__description');
 };
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && !focusedInput()) {
+  if (isEscapeKey(evt) && !isInputFocused()) {
     evt.preventDefault();
     closeUploadOverlay();
   }
