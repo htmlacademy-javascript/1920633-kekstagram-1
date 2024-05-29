@@ -7,11 +7,15 @@ const pristine = new Pristine(photoEditorForm, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'span',
+  errorTextTag: 'p',
   errorTextClass: 'img-upload__error'
 });
 
-const getHashtagArray = (value) => value.split(' ');
+const getHashtagArray = (value) => {
+  const hashtagArray = value.split(' ');
+
+  return hashtagArray.filter((element) => element);
+};
 
 const validateHashtag = (value) => {
   const hashtagArray = getHashtagArray(value);
@@ -24,7 +28,7 @@ const validateHashtagNumber = (value) => {
 
   return hashtagArray.length <= 5;
 };
-
+// replaceAll(' ', '')
 const validateHashtagDuplicates = (value) => {
   const hashtagArray = getHashtagArray(value).map((element) => element.toLowerCase());
   const duplicates = hashtagArray.filter((item, index) => hashtagArray.indexOf(item) !== index);
