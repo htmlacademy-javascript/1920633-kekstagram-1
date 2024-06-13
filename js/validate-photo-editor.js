@@ -1,7 +1,17 @@
+/* eslint-disable no-console*/
+import {sendData} from './api.js';
+import {showError, showSuccess} from './util.js';
+
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
+};
+
 const photoEditorForm = document.querySelector('.img-upload__form');
 const hashtagInput = photoEditorForm.querySelector('.text__hashtags');
 const textareaInput = photoEditorForm.querySelector('.text__description');
 const validHashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const submitButton = document.querySelector('#upload-submit');
 
 const pristine = new Pristine(photoEditorForm, {
   classTo: 'img-upload__field-wrapper',
@@ -28,7 +38,7 @@ const validateHashtagNumber = (value) => {
 
   return hashtagArray.length <= 5;
 };
-// replaceAll(' ', '')
+
 const validateHashtagDuplicates = (value) => {
   const hashtagArray = getHashtagArray(value).map((element) => element.toLowerCase());
   const duplicates = hashtagArray.filter((item, index) => hashtagArray.indexOf(item) !== index);
@@ -44,10 +54,36 @@ const validateTextarea = (value) => value.length <= 140;
 
 pristine.addValidator(textareaInput, validateTextarea, 'Длина комментария не должна превышать 140 символов');
 
-photoEditorForm.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
 
-  if (!isValid) {
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const setUserFormSubmit = (onSuccess) => {
+  photoEditorForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
-});
+
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(console.log('yay'))
+        .then(() => {
+          showSuccess();
+        })
+        .then(onSuccess)
+        .catch(() => {
+          showError();
+        })
+        .finally(unblockSubmitButton);
+    }
+  });
+};
+
+export {setUserFormSubmit};
