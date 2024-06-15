@@ -31,3 +31,11 @@ buttonBigger.addEventListener('click', () => {
   scaleInput.value = `${currentValue}%`;
   currentPhoto.style.transform = `scale(${currentScale})`;
 });
+
+const resetScale = () => {
+  currentValue = 100;
+  scaleInput.value = '100%';
+  currentPhoto.style.transform = 'scale(1)';
+};
+
+export {resetScale};

@@ -141,4 +141,12 @@ sliderElement.noUiSlider.on('update', () => {
   currentPhoto.style.filter = `${currentSettings.filter}(${sliderValue.value}${currentSettings.units})`;
 });
 
+const resetFilter = () => {
+  currentPhoto.className = '';
+  hideSlider();
+  clearStyle();
+};
+
 hideSlider();
+
+export {resetFilter};

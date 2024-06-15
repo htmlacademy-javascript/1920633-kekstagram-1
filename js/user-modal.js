@@ -1,8 +1,6 @@
 import {isEscapeKey} from './util.js';
 import {openBigPicture, clearComments} from './open-big-picture.js';
-import {usersPosts} from './thumbnails.js';
 
-const thumbnails = document.querySelectorAll('.picture');
 const bigPicture = document.querySelector('.big-picture');
 const modalCloseElement = document.querySelector('.big-picture__cancel');
 const socialComments = bigPicture.querySelector('.social__comments');
@@ -26,10 +24,6 @@ const openModal = (thumbnail, picture) => {
   });
 };
 
-for (let i = 0; i < thumbnails.length; i++) {
-  openModal(thumbnails[i], usersPosts[i]);
-}
-
 function closeModal () {
   body.classList.remove('modal-open');
   bigPicture.classList.add('hidden');
@@ -41,3 +35,5 @@ function closeModal () {
 modalCloseElement.addEventListener('click', () => {
   closeModal();
 });
+
+export {openModal, closeModal};
