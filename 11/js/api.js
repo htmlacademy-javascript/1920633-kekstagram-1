@@ -1,5 +1,3 @@
-import {showLoadingError} from './util.js';
-
 const BASE_URL = 'https://28.javascript.htmlacademy.pro/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -17,9 +15,6 @@ const load = (route, method = Method.GET, body = null) =>
         throw new Error();
       }
       return response.json();
-    })
-    .catch(() => {
-      showLoadingError();
     });
 
 const getData = () => load(Route.GET_DATA);

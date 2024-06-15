@@ -1,4 +1,3 @@
-/* eslint-disable no-console*/
 import {sendData} from './api.js';
 import {showError, showSuccess} from './util.js';
 
@@ -73,7 +72,6 @@ const setUserFormSubmit = (onSuccess) => {
     if (isValid) {
       blockSubmitButton();
       sendData(new FormData(evt.target))
-        .then(console.log('yay'))
         .then(() => {
           showSuccess();
         })

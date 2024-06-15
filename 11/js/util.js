@@ -1,6 +1,6 @@
 import {resetScale} from './scale-image.js';
 import {resetFilter} from './filters.js';
-import {clearInputs} from './user-form.js';
+import {closeUploadOverlay, resetForm} from './user-form.js';
 
 const templateSuccess = document.querySelector('#success')
   .content
@@ -43,7 +43,7 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 const clearForm = () => {
   resetScale();
   resetFilter();
-  clearInputs();
+  resetForm();
 };
 
 const showLoadingError = () => {
@@ -123,6 +123,7 @@ const showAlert = (template) => {
 
 const showSuccess = () => {
   showAlert(templateSuccess);
+  closeUploadOverlay();
 };
 
 const showError = () => {
