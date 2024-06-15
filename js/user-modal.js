@@ -1,4 +1,3 @@
-/* eslint-disable no-console*/
 import {isEscapeKey} from './util.js';
 import {openBigPicture, clearComments} from './open-big-picture.js';
 

@@ -1,6 +1,5 @@
-/* eslint-disable no-console*/
 import './util.js';
-import {createPostList} from './data.js';
+import './data.js';
 import {renderPostsList} from './thumbnails.js';
 import {closeModal} from './user-modal.js';
 import './user-form.js';
@@ -8,12 +7,14 @@ import {setUserFormSubmit} from './validate-photo-editor.js';
 import './scale-image.js';
 import './filters.js';
 import {getData} from './api.js';
-
-console.log(createPostList());
+import { showLoadingError } from './util.js';
 
 getData()
   .then((photos) => {
     renderPostsList(photos);
+  })
+  .catch(() => {
+    showLoadingError();
   });
 
 setUserFormSubmit(closeModal);

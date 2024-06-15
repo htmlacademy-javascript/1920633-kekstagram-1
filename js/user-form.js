@@ -5,8 +5,7 @@ const body = document.body;
 const uploadInput = document.getElementById('upload-file');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
 const closeOverlayButton = document.getElementById('upload-cancel');
-const hashtagInput = document.querySelector('.text__hashtags');
-const textareaInput = document.querySelector('.text__description');
+const form = document.querySelector('.img-upload__form');
 
 const isInputFocused = () => {
   const activeElement = document.activeElement;
@@ -14,7 +13,9 @@ const isInputFocused = () => {
 };
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt) && !isInputFocused()) {
+  const errorAlert = document.querySelector('.error');
+
+  if (isEscapeKey(evt) && !isInputFocused() && !errorAlert) {
     evt.preventDefault();
     closeUploadOverlay();
   }
@@ -40,10 +41,8 @@ closeOverlayButton.addEventListener('click', () => {
   closeUploadOverlay();
 });
 
-const clearInputs = () => {
-  uploadInput.value = '';
-  hashtagInput.value = '';
-  textareaInput.value = '';
+const resetForm = () => {
+  form.reset();
 };
 
-export {clearInputs};
+export {closeUploadOverlay, resetForm};
