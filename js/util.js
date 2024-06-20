@@ -130,4 +130,13 @@ const showError = () => {
   showAlert(templateError);
 };
 
-export {getRandomInteger, getUniqueId, getRandomArrayElement, isEscapeKey, clearForm, showSuccess, showError, showLoadingError};
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getRandomInteger, getUniqueId, getRandomArrayElement, isEscapeKey, clearForm, showSuccess, showError, showLoadingError, debounce};

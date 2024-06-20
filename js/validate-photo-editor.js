@@ -74,8 +74,8 @@ const setUserFormSubmit = (onSuccess) => {
       sendData(new FormData(evt.target))
         .then(() => {
           showSuccess();
+          onSuccess();
         })
-        .then(onSuccess)
         .catch(() => {
           showError();
         })

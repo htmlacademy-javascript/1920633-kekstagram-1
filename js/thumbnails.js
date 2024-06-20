@@ -1,4 +1,5 @@
 import {openModal} from './user-modal.js';
+import { getUniqueId } from './util.js';
 
 const templatePictures = document.querySelector('#picture')
   .content
@@ -20,4 +21,45 @@ const renderPostsList = (usersPosts) => {
   picturesList.appendChild(photoFragment);
 };
 
-export {renderPostsList};
+const clearPosts = () => {
+  const allPosts = document.querySelectorAll('.picture');
+
+  return allPosts.forEach((element) => {
+    element.remove();
+  });
+};
+
+const sortPosts = (postA, postB) => {
+  const postOne = postA.comments.length;
+  const postTwo = postB.comments.length;
+
+  return postTwo - postOne;
+};
+
+const showDefaultPosts = (posts) => {
+  clearPosts();
+  renderPostsList(posts);
+};
+
+const showRandomPosts = (posts) => {
+  clearPosts();
+
+  const randomArray = [];
+  const randomId = getUniqueId(0, posts.length - 1);
+
+  for (let i = 0; i < 10; i++) {
+    const currentRandomId = randomId();
+    randomArray.push(posts[currentRandomId]);
+  }
+
+  renderPostsList(randomArray);
+};
+
+const showDiscussedPosts = (posts) => {
+  clearPosts();
+  const discussedArray = posts.slice().sort(sortPosts);
+
+  renderPostsList(discussedArray);
+};
+
+export {renderPostsList, sortPosts, showDefaultPosts, showRandomPosts, showDiscussedPosts};
