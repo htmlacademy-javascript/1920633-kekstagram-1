@@ -28,15 +28,6 @@ const setFilterClickListener = (posts) => {
   });
 };
 
-// if (evt.target === buttonDefault) {
-//   showDefaultPosts(posts);
-// } else if (evt.target === buttonRandom) {
-//   showRandomPosts(posts);
-// } else if (evt.target === buttonDiscussed) {
-//   showDiscussedPosts(posts);
-// }
-
-
 const showFilters = (posts) => {
   imgFilters.classList.remove('img-filters--inactive');
   setFilterClickListener(posts);
