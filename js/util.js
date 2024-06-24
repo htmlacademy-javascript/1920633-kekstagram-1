@@ -17,27 +17,6 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-const getUniqueId = (min, max) => {
-  const idList = [];
-
-  return () => {
-    let currentValue = getRandomInteger(min, max);
-
-    if (idList.length >= (max - min + 1)) {
-      return null;
-    }
-
-    while (idList.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-
-    idList.push(currentValue);
-    return currentValue;
-  };
-};
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const clearForm = () => {
@@ -130,4 +109,13 @@ const showError = () => {
   showAlert(templateError);
 };
 
-export {getRandomInteger, getUniqueId, getRandomArrayElement, isEscapeKey, clearForm, showSuccess, showError, showLoadingError};
+function debounce (callback, timeoutDelay) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+export {getRandomInteger, isEscapeKey, clearForm, showSuccess, showError, showLoadingError, debounce};

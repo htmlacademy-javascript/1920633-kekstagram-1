@@ -20,4 +20,39 @@ const renderPostsList = (usersPosts) => {
   picturesList.appendChild(photoFragment);
 };
 
-export {renderPostsList};
+const clearPosts = () => {
+  const allPosts = document.querySelectorAll('.picture');
+
+  return allPosts.forEach((element) => {
+    element.remove();
+  });
+};
+
+const sortPosts = (postA, postB) => {
+  const postOne = postA.comments.length;
+  const postTwo = postB.comments.length;
+
+  return postTwo - postOne;
+};
+
+const showDefaultPosts = (posts) => {
+  clearPosts();
+  renderPostsList(posts);
+};
+
+const showRandomPosts = (posts) => {
+  clearPosts();
+
+  const randomArray = posts.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+
+  renderPostsList(randomArray);
+};
+
+const showDiscussedPosts = (posts) => {
+  clearPosts();
+  const discussedArray = posts.slice().sort(sortPosts);
+
+  renderPostsList(discussedArray);
+};
+
+export {renderPostsList, sortPosts, showDefaultPosts, showRandomPosts, showDiscussedPosts};
