@@ -1,5 +1,4 @@
 import {openModal} from './user-modal.js';
-import { getUniqueId } from './util.js';
 
 const templatePictures = document.querySelector('#picture')
   .content
@@ -44,13 +43,7 @@ const showDefaultPosts = (posts) => {
 const showRandomPosts = (posts) => {
   clearPosts();
 
-  const randomArray = [];
-  const randomId = getUniqueId(0, posts.length - 1);
-
-  for (let i = 0; i < 10; i++) {
-    const currentRandomId = randomId();
-    randomArray.push(posts[currentRandomId]);
-  }
+  const randomArray = posts.slice().sort(() => Math.random() - 0.5).slice(0, 10);
 
   renderPostsList(randomArray);
 };

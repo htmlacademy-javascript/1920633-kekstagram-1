@@ -1,5 +1,4 @@
 import './util.js';
-import './data.js';
 import {renderPostsList} from './thumbnails.js';
 import {closeModal} from './user-modal.js';
 import './user-form.js';
