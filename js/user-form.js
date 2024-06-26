@@ -28,7 +28,7 @@ const onDocumentKeydown = (evt) => {
 uploadInput.addEventListener('change', () => {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FILE_TYPES.some((item) => fileName.endsWith(item));
 
   if (matches) {
     previewImage.src = URL.createObjectURL(file);
