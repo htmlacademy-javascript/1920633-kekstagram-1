@@ -12,9 +12,9 @@ const templateError = document.querySelector('#error')
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const clearForm = () => {
-  resetScale();
-  resetFilter();
   resetForm();
+  resetFilter();
+  resetScale();
 };
 
 const showLoadingError = () => {
