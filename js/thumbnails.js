@@ -1,5 +1,7 @@
 import {openModal} from './user-modal.js';
 
+const POSTS_NUMBER = 10;
+
 const templatePictures = document.querySelector('#picture')
   .content
   .querySelector('.picture');
@@ -43,7 +45,7 @@ const showDefaultPosts = (posts) => {
 const showRandomPosts = (posts) => {
   clearPosts();
 
-  const randomArray = posts.slice().sort(() => Math.random() - 0.5).slice(0, 10);
+  const randomArray = posts.slice().sort(() => Math.random() - 0.5).slice(0, POSTS_NUMBER);
 
   renderPostsList(randomArray);
 };

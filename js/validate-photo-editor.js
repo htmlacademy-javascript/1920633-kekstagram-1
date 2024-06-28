@@ -1,6 +1,9 @@
 import {sendData} from './api.js';
 import {showError, showSuccess} from './util.js';
 
+const TAGS_NUMBER = 5;
+const MAX_CHARACTERS = 140;
+
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
   SENDING: 'Публикую...'
@@ -35,7 +38,7 @@ const validateHashtag = (value) => {
 const validateHashtagNumber = (value) => {
   const hashtagArray = getHashtagArray(value);
 
-  return hashtagArray.length <= 5;
+  return hashtagArray.length <= TAGS_NUMBER;
 };
 
 const validateHashtagDuplicates = (value) => {
@@ -49,7 +52,7 @@ pristine.addValidator(hashtagInput, validateHashtag, 'Введён невали�
 pristine.addValidator(hashtagInput, validateHashtagNumber, 'Количество хэштегов не должно превышать 5');
 pristine.addValidator(hashtagInput, validateHashtagDuplicates, 'Хэштеги не должны повторяться');
 
-const validateTextarea = (value) => value.length <= 140;
+const validateTextarea = (value) => value.length <= MAX_CHARACTERS;
 
 pristine.addValidator(textareaInput, validateTextarea, 'Длина комментария не должна превышать 140 символов');
 

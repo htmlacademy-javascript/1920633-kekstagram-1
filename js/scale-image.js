@@ -1,3 +1,7 @@
+const VALUE_STEP = 25;
+const MIN_IMAGE_SIZE = 25;
+const MAX_IMAGE_SIZE = 100;
+
 const buttonSmaller = document.querySelector('.scale__control--smaller');
 const buttonBigger = document.querySelector('.scale__control--bigger');
 const scaleInput = document.querySelector('.scale__control--value');
@@ -7,11 +11,11 @@ scaleInput.value = '100%';
 let currentValue = parseInt(scaleInput.value, 10);
 
 buttonSmaller.addEventListener('click', () => {
-  if (currentValue <= 25) {
+  if (currentValue <= MIN_IMAGE_SIZE) {
     return false;
   }
 
-  currentValue = currentValue - 25;
+  currentValue = currentValue - VALUE_STEP;
 
   const currentScale = currentValue / 100;
 
@@ -20,11 +24,11 @@ buttonSmaller.addEventListener('click', () => {
 });
 
 buttonBigger.addEventListener('click', () => {
-  if (currentValue >= 100) {
+  if (currentValue >= MAX_IMAGE_SIZE) {
     return false;
   }
 
-  currentValue = currentValue + 25;
+  currentValue = currentValue + VALUE_STEP;
 
   const currentScale = currentValue / 100;
 

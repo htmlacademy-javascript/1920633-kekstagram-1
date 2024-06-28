@@ -1,3 +1,4 @@
+const COUNT_STEP = 5;
 let currentCount = 0;
 let currentComments = [];
 
@@ -12,7 +13,7 @@ const socialComments = document.querySelector('.social__comments');
 const commentFragment = document.createDocumentFragment();
 
 const showNextComments = () => {
-  const renderedComments = currentComments.slice(currentCount, currentCount + 5);
+  const renderedComments = currentComments.slice(currentCount, currentCount + COUNT_STEP);
 
   renderedComments.forEach(({avatar, name, message}) => {
     const comment = document.createElement('li');
@@ -40,7 +41,7 @@ const showNextComments = () => {
     commentsLoader.classList.add('hidden');
   }
 
-  currentCount += 5;
+  currentCount += COUNT_STEP;
 };
 
 const showComments = (commentsArray) => {

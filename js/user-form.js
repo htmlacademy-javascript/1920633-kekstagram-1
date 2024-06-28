@@ -25,6 +25,10 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+const resetForm = () => {
+  form.reset();
+};
+
 uploadInput.addEventListener('change', () => {
   const file = uploadInput.files[0];
   const fileName = file.name.toLowerCase();
@@ -52,12 +56,10 @@ function closeUploadOverlay () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-closeOverlayButton.addEventListener('click', () => {
+closeOverlayButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
   closeUploadOverlay();
 });
-
-const resetForm = () => {
-  form.reset();
-};
 
 export {closeUploadOverlay, resetForm};
